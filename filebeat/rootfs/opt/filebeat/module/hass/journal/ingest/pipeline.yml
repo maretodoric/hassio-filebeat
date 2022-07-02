@@ -1,0 +1,37 @@
+description: Pipeline for parsing Home Assistant journal
+processors:
+- grok:
+    description: "Main grok processor to extract message"
+    field: message
+    patterns:
+    - 'apparmor="%{NOTSPACE:apparmor.action}" operation="%{NOTSPACE:apparmor.operation}" profile="%{NOTSPACE:apparmor.profile}" name="%{NOTSPACE:apparmor.name}" pid=%{NUMBER:apparmor.pid} comm="%{NOTSPACE:apparmor.comm}" requested_mask="%{NOTSPACE:apparmor.requested_mask}" denied_mask="%{NOTSPACE:apparmor.denied_mask}" fsuid=%{NUMBER:apparmor.fsuid} ouid=%{NUMBER:apparmor.ouid}'
+    - 'apparmor="%{NOTSPACE:apparmor.action}" operation="%{NOTSPACE:apparmor.operation}" profile="%{NOTSPACE:apparmor.profile}" name=%{NOTSPACE:apparmor.name} pid=%{NUMBER:apparmor.pid} comm="%{NOTSPACE:apparmor.comm}" requested_mask="%{NOTSPACE:apparmor.requested_mask}" denied_mask="%{NOTSPACE:apparmor.denied_mask}" fsuid=%{NUMBER:apparmor.fsuid} ouid=%{NUMBER:apparmor.ouid}'
+    ignore_missing: true
+    ignore_failure: true
+- gsub:
+    field: message
+    pattern: '(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]'
+    replacement: ''
+    ignore_missing: true
+    ignore_failure: true
+- set:
+    field: event.ingested
+    value: '{{_ingest.timestamp}}'
+- append:
+    field: tags
+    value: "addon"
+    if: "ctx.container?.name != null && ctx.container?.name =~ /^addon/"
+    allow_duplicates: false
+    ignore_failure: true
+- append:
+    field: tags
+    value: "supervisor"
+    if: "ctx.container?.name != null && ctx.container?.name == 'hassio_supervisor'"
+- append:
+    field: tags
+    value: "core"
+    if: "ctx.container?.name != null && ctx.container?.name == 'homeassistant'"
+on_failure:
+- set:
+    field: error.message
+    value: '{{ _ingest.on_failure_message }}'

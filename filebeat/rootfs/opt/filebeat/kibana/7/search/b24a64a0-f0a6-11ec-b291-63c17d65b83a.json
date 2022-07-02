@@ -1,0 +1,80 @@
+{
+  "attributes": {
+    "columns": [
+      "hass.log_level",
+      "hass.component",
+      "message"
+    ],
+    "description": "",
+    "grid": {
+      "columns": {
+        "hass.component": {
+          "width": 424.16666666666674
+        },
+        "hass.log_level": {
+          "width": 191.66666666666663
+        }
+      }
+    },
+    "hideChart": false,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": {
+        "query": {
+          "query": "",
+          "language": "kuery"
+        },
+        "filter": [
+          {
+            "meta": {
+              "alias": null,
+              "negate": false,
+              "disabled": false,
+              "type": "phrase",
+              "key": "event.dataset",
+              "params": {
+                "query": "hass.main"
+              },
+              "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index"
+            },
+            "query": {
+              "match_phrase": {
+                "event.dataset": "hass.main"
+              }
+            },
+            "$state": {
+              "store": "appState"
+            }
+          }
+        ],
+        "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.index"
+      }
+    },
+    "sort": [
+      [
+        "@timestamp",
+        "desc"
+      ]
+    ],
+    "title": "Home Assistant Core Logs"
+  },
+  "coreMigrationVersion": "8.2.0",
+  "id": "b24a64a0-f0a6-11ec-b291-63c17d65b83a",
+  "migrationVersion": {
+    "search": "8.0.0"
+  },
+  "references": [
+    {
+      "id": "a95e6e90-f079-11ec-b291-63c17d65b83a",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type": "index-pattern"
+    },
+    {
+      "id": "a95e6e90-f079-11ec-b291-63c17d65b83a",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+      "type": "index-pattern"
+    }
+  ],
+  "type": "search",
+  "updated_at": "2022-06-20T14:38:48.814Z",
+  "version": "WzYzOTQsMTBd"
+}

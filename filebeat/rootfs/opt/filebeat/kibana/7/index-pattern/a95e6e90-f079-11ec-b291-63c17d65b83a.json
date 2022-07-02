@@ -1,0 +1,19 @@
+{
+  "attributes": {
+    "fieldAttrs": "{\"container.name\":{\"count\":4},\"hass.component\":{\"count\":1},\"hass.log_level\":{\"count\":1},\"journald.process.name\":{\"count\":2},\"message\":{\"count\":5},\"syslog.identifier\":{\"count\":4},\"event.dataset\":{\"count\":1},\"log.syslog.priority\":{\"count\":1},\"systemd.unit\":{\"count\":3},\"journald.custom.audit_field_apparmor\":{\"count\":3},\"systemd.transport\":{\"count\":1},\"apparmor.comm\":{\"count\":14},\"apparmor.denied_mask\":{\"count\":8},\"apparmor.name\":{\"count\":1},\"hass.uuid\":{\"count\":2}}",
+    "fields": "[]",
+    "runtimeFieldMap": "{}",
+    "timeFieldName": "@timestamp",
+    "title": "INDEXCHANGEME*",
+    "typeMeta": "{}"
+  },
+  "coreMigrationVersion": "8.2.0",
+  "id": "a95e6e90-f079-11ec-b291-63c17d65b83a",
+  "migrationVersion": {
+    "index-pattern": "8.0.0"
+  },
+  "references": [],
+  "type": "index-pattern",
+  "updated_at": "2022-06-24T18:54:24.530Z",
+  "version": "WzY0NTEsMTBd"
+}

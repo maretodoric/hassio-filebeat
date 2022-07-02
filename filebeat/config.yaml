@@ -1,0 +1,50 @@
+name: "Filebeat"
+description: "Filebeat addon that can be used to ship home-assistant.log file to your ES Cluster."
+version: "0.3.11"
+image: "dckr.bulletproof.rs/mtodoric/hassio-filebeat/filebeat-{arch}"
+slug: "filebeat"
+init: false
+advanced: true
+journald: true
+url: https://github.com/maretodoric/hassio-filebeat
+apparmor: true
+homeassistant_api: true
+auth_api: true
+ingress: false
+homeassistant: 2022.3.1
+arch:
+  - armv7
+  - amd64
+  - aarch64
+options:
+  es_url: null
+  es_username: null
+  es_password: null
+  es_ssl_verification_mode: full
+  es_index: null
+  es_number_of_shards: 1
+  es_number_of_replicas: 0
+  es_pipeline_path: ""
+  kibana_url: ""
+  enable_journal: true
+  filebeat_version: 8.1.3
+  fb_log_level: info
+  clear_cache: false
+  debug_mode: false
+schema:
+  es_url: str
+  es_username: str
+  es_password: password
+  es_ssl_verification_mode: list(full|strict|certificate|none)
+  es_index: str
+  es_number_of_shards: int
+  es_number_of_replicas: int
+  es_pipeline_path: str?
+  kibana_url: str?
+  enable_journal: bool
+  filebeat_version: list(7.17.4|8.0.1|8.1.3|8.2.3)
+  fb_log_level: list(error|warning|info|debug)
+  clear_cache: bool
+  debug_mode: bool
+map:
+  - config

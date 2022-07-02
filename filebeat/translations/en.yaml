@@ -1,0 +1,40 @@
+configuration:
+  es_url:
+    name: Elasticsearch URL
+    description: Full URL to Elasticsearch host - including port number (output.elasticsearch.hosts)
+  es_username:
+    name: Elasticsearch Username
+    description: Username to authenticate against Elasticsearch (output.elasticsearch.username)
+  es_password:
+    name: Elasticsearch Password
+    description: Passowrd to authenticate against Elasticsearch (output.elasticsearch.password)
+  es_ssl_verification_mode:
+    name: SSL Verification Mode
+    description: SSL Verification mode when Elasticsearch is using https endpoint (output.elasticsearch.ssl.verification_mode)
+  es_index:
+    name: Elasticsearch Index Name
+    description: Index/Date Stream name of where to index data
+  es_number_of_shards:
+    name: Numbef of shards
+    description: Number of shards for index when creating it (setup.template.settings.number_of_shards)
+  es_number_of_replicas:
+    name: Numbef of replicas
+    description: Number of replicas for index when creating it (setup.template.settings.number_of_replicas)
+  es_pipeline_path:
+    name: Custom pipeline path (optional)
+    description: If you want to create custom pipeline for this setup, this is where to type it's path, full path inside /config dir
+  kibana_url:
+    name: Kibana URL
+    description: Enter Kibana URL if you would like to load search and index pattern
+  enable_journal:
+    name: Enable Journal
+    description: Whether to enable ingesting of systemd journal alongside home-assistant.log
+  filebeat_version:
+    name: Filebeat Version
+    description: Choose which Filebeat version to use.
+  fb_log_level:
+    name: Log Level
+    description: Level of logging for addon and filebeat.
+  clear_cache:
+    name: Clear Cache
+    description: This will clear all filebeat cache and will start ingesting all data from scratch

@@ -1,0 +1,117 @@
+description: Pipeline for parsing Home Assistant logfile
+processors:
+- set:
+    field: event.ingested
+    value: '{{_ingest.timestamp}}'
+- grok:
+    description: "Main grok processor to extract message"
+    field: message
+    patterns:
+    - '%{TIMESTAMP_ISO8601:hass.timestamp} %{LOGLEVEL:hass.log_level} \(%{DATA:hass.thread}\) \[%{DATA:hass.component}\] %{GREEDYMULTILINE:hass.message}'
+    pattern_definitions:
+      GREEDYMULTILINE: |-
+        (.|
+        )*
+    ignore_missing: true
+- rename:
+    field: message
+    target_field: event.original
+    ignore_missing: true
+- rename:
+    field: hass.message
+    target_field: message
+    ignore_missing: true
+- grok:
+    description: "Helper grok processor to extract slow and deprecated tags"
+    field: message
+    patterns:
+    - 'Updating %{DATA:hass.integration} %{DATA:hass.domain} took longer than the scheduled update interval %{NOTSPACE:hass.update_interval}'
+    - 'Update of %{ENTITY:hass.entity.name} is taking over %{NUMBER:hass.update_interval} seconds'
+    - '.*%{DEPRECATED:hass.deprecated}.*'
+    - '.*%{SLOW:hass.update_interval}'
+    pattern_definitions:
+      DEPRECATED: 'deprecated'
+      SLOW: '[Tt]imeout'
+      DOMAINS: CHANGEDOMAINS
+      ENTITY: '%{DOMAINS:hass.entity.domain}\.%{NOTSPACE}'
+    ignore_missing: true
+    ignore_failure: true
+- grok:
+    description: "Helper grok processor to tag class"
+    field: message
+    patterns:
+    - '%{PYCLASS}'
+    pattern_definitions:
+      PYCLASS: '<class ''%{NOTSPACE:hass.python_class}''>'
+    ignore_missing: true
+    ignore_failure: true
+- split:
+    field: hass.component
+    separator: \.
+    target_field: hass.components
+    ignore_missing: true
+    ignore_failure: true
+- date:
+    if: ctx.event.timezone == null
+    field: hass.timestamp
+    target_field: '@timestamp'
+    formats:
+    - MMM  d HH:mm:ss
+    - MMM dd HH:mm:ss
+    - MMM d HH:mm:ss
+    - yyyy-MM-dd HH:mm:ss
+    - ISO8601
+    on_failure:
+    - append:
+        field: error.message
+        value: '{{ _ingest.on_failure_message }}'
+- date:
+    if: ctx.event.timezone != null
+    field: hass.timestamp
+    target_field: '@timestamp'
+    formats:
+    - MMM  d HH:mm:ss
+    - MMM dd HH:mm:ss
+    - MMM d HH:mm:ss
+    - yyyy-MM-dd HH:mm:ss
+    - ISO8601
+    timezone: '{{ event.timezone }}'
+    on_failure:
+    - append:
+        field: error.message
+        value: '{{ _ingest.on_failure_message }}'
+- remove:
+    field: hass.timestamp
+- set:
+    field: event.kind
+    value: event
+- append:
+    field: related.hosts
+    value: "{{host.hostname}}"
+    if: "ctx.host?.hostname != null && ctx.host?.hostname != ''"
+    allow_duplicates: false
+- append:
+    field: tags
+    value: "deprecation"
+    if: "ctx.hass?.deprecated != null"
+- append:
+    field: tags
+    value: "slow"
+    if: "ctx.hass?.update_interval != null"
+- append:
+    field: tags
+    value: "{{hass.python_class}}"
+    if: "ctx.hass?.python_class != null"
+- remove:
+    field: hass.update_interval
+    if: "ctx.hass?.update_interval != null"
+- remove:
+    field: hass.deprecated
+    if: "ctx.hass?.deprecated != null"
+- remove:
+    field: hass.python_class
+    if: "ctx.hass?.python_class != null"
+on_failure:
+- set:
+    field: error.message
+    value: '{{ _ingest.on_failure_message }}'

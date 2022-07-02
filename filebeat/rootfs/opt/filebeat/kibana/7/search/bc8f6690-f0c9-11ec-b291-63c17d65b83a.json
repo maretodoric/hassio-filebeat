@@ -1,0 +1,105 @@
+{
+  "attributes": {
+    "columns": [
+      "container.name",
+      "message"
+    ],
+    "description": "",
+    "grid": {
+      "columns": {
+        "hass.component": {
+          "width": 424.16666666666674
+        },
+        "hass.log_level": {
+          "width": 191.66666666666663
+        }
+      }
+    },
+    "hideChart": false,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": {
+        "query": {
+          "query": "",
+          "language": "kuery"
+        },
+        "filter": [
+          {
+            "$state": {
+              "store": "appState"
+            },
+            "meta": {
+              "alias": null,
+              "disabled": false,
+              "key": "event.dataset",
+              "negate": false,
+              "params": {
+                "query": "hass.journal"
+              },
+              "type": "phrase",
+              "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index"
+            },
+            "query": {
+              "match_phrase": {
+                "event.dataset": "hass.journal"
+              }
+            }
+          },
+          {
+            "meta": {
+              "alias": null,
+              "negate": false,
+              "disabled": false,
+              "type": "phrase",
+              "key": "syslog.identifier",
+              "params": {
+                "query": "kernel"
+              },
+              "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index"
+            },
+            "query": {
+              "match_phrase": {
+                "syslog.identifier": "kernel"
+              }
+            },
+            "$state": {
+              "store": "appState"
+            }
+          }
+        ],
+        "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.index"
+      }
+    },
+    "sort": [
+      [
+        "@timestamp",
+        "desc"
+      ]
+    ],
+    "title": "Home Assistant Journal Logs <kernel>"
+  },
+  "coreMigrationVersion": "8.2.0",
+  "id": "bc8f6690-f0c9-11ec-b291-63c17d65b83a",
+  "migrationVersion": {
+    "search": "8.0.0"
+  },
+  "references": [
+    {
+      "id": "a95e6e90-f079-11ec-b291-63c17d65b83a",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type": "index-pattern"
+    },
+    {
+      "id": "a95e6e90-f079-11ec-b291-63c17d65b83a",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+      "type": "index-pattern"
+    },
+    {
+      "id": "a95e6e90-f079-11ec-b291-63c17d65b83a",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index",
+      "type": "index-pattern"
+    }
+  ],
+  "type": "search",
+  "updated_at": "2022-06-20T18:49:38.431Z",
+  "version": "WzY0MTEsMTBd"
+}

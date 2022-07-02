@@ -1,0 +1,119 @@
+{
+  "attributes": {
+    "description": "",
+    "hits": 0,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": {
+        "query": {
+          "query": "",
+          "language": "kuery"
+        },
+        "filter": []
+      }
+    },
+    "optionsJSON": {
+      "useMargins": true,
+      "syncColors": false,
+      "hidePanelTitles": false
+    },
+    "panelsJSON": {
+      "0": {
+        "version": "8.2.0",
+        "type": "search",
+        "gridData": {
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 15,
+          "i": "bfde5c3a-9c65-4a95-a4c8-eed85710a765"
+        },
+        "panelIndex": "bfde5c3a-9c65-4a95-a4c8-eed85710a765",
+        "embeddableConfig": {
+          "enhancements": {}
+        },
+        "panelRefName": "panel_bfde5c3a-9c65-4a95-a4c8-eed85710a765"
+      },
+      "1": {
+        "version": "8.2.0",
+        "type": "search",
+        "gridData": {
+          "x": 24,
+          "y": 0,
+          "w": 24,
+          "h": 15,
+          "i": "f2e34f3a-720d-4640-99eb-1479dcd248bd"
+        },
+        "panelIndex": "f2e34f3a-720d-4640-99eb-1479dcd248bd",
+        "embeddableConfig": {
+          "enhancements": {}
+        },
+        "panelRefName": "panel_f2e34f3a-720d-4640-99eb-1479dcd248bd"
+      },
+      "2": {
+        "version": "8.2.0",
+        "type": "search",
+        "gridData": {
+          "x": 0,
+          "y": 15,
+          "w": 24,
+          "h": 15,
+          "i": "640509d3-3399-4b64-947a-120e388e8dbd"
+        },
+        "panelIndex": "640509d3-3399-4b64-947a-120e388e8dbd",
+        "embeddableConfig": {
+          "enhancements": {}
+        },
+        "panelRefName": "panel_640509d3-3399-4b64-947a-120e388e8dbd"
+      },
+      "3": {
+        "version": "8.2.0",
+        "type": "search",
+        "gridData": {
+          "x": 24,
+          "y": 15,
+          "w": 24,
+          "h": 15,
+          "i": "f18e2c79-4068-4fa3-b271-e208495a104d"
+        },
+        "panelIndex": "f18e2c79-4068-4fa3-b271-e208495a104d",
+        "embeddableConfig": {
+          "enhancements": {}
+        },
+        "panelRefName": "panel_f18e2c79-4068-4fa3-b271-e208495a104d"
+      }
+    },
+    "timeRestore": false,
+    "title": "Home Assistant Logs",
+    "version": 1
+  },
+  "coreMigrationVersion": "8.2.0",
+  "id": "af879ed0-f930-11ec-bdd9-11788c15982d",
+  "migrationVersion": {
+    "dashboard": "8.2.0"
+  },
+  "references": [
+    {
+      "id": "b24a64a0-f0a6-11ec-b291-63c17d65b83a",
+      "name": "bfde5c3a-9c65-4a95-a4c8-eed85710a765:panel_bfde5c3a-9c65-4a95-a4c8-eed85710a765",
+      "type": "search"
+    },
+    {
+      "id": "21d5afe0-f0b2-11ec-b291-63c17d65b83a",
+      "name": "f2e34f3a-720d-4640-99eb-1479dcd248bd:panel_f2e34f3a-720d-4640-99eb-1479dcd248bd",
+      "type": "search"
+    },
+    {
+      "id": "6834abd0-f0b2-11ec-b291-63c17d65b83a",
+      "name": "640509d3-3399-4b64-947a-120e388e8dbd:panel_640509d3-3399-4b64-947a-120e388e8dbd",
+      "type": "search"
+    },
+    {
+      "id": "bc8f6690-f0c9-11ec-b291-63c17d65b83a",
+      "name": "f18e2c79-4068-4fa3-b271-e208495a104d:panel_f18e2c79-4068-4fa3-b271-e208495a104d",
+      "type": "search"
+    }
+  ],
+  "type": "dashboard",
+  "updated_at": "2022-07-01T11:26:44.037Z",
+  "version": "WzY2ODEsMTBd"
+}
