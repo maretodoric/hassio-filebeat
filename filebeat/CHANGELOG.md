@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.12] - 13-08-2022
+### CHANGED
+- Changed ingest pipeline to adjust for date change in https://github.com/home-assistant/core/pull/74518
+
 ## [0.3.11] - 02-07-2022
 ### CHANGED
 - Changed docker registry to self-hosted
